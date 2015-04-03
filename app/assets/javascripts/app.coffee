@@ -17,16 +17,11 @@ caloriesPerMeal.config([ '$routeProvider',
 controllers = angular.module('controllers',[])
 controllers.controller("MealsController", [ '$scope', '$routeParams', '$location','$resource'
   ($scope,$routeParams,$location,$resource)->
-    # $scope.search = (keywords)->  $location.path("/").search('keywords',keywords)
-    
-    
-    #$scope.search = (date_to)->  $location.path("/").search('date_to',date_to)
-    #$scope.search = (date_from)->  $location.path("/").search('date_from',date_from)
     $scope.search = (date_from,date_to)->  $location.path("/").search({date_from: date_from,date_to:date_to})
 
+    #This statement creates a resource that will have methods to execute REST requests
     Meal = $resource('/meals/:recipeId', { mealId: "@id", format: 'json' })
 
-    # if $routeParams.keywords
     if $routeParams.date_from && $routeParams.date_to
       #keywords = $routeParams.keywords.toLowerCase()
       date_from = $routeParams.date_from
@@ -39,5 +34,12 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
       #Meal.query(keywords: $routeParams.keywords, (results)-> $scope.meals = results)
       Meal.query({date_from: $routeParams.date_from, date_to: $routeParams.date_to}, (results)-> $scope.meals = results)
     else
-      $scope.meals = []
+      #This means no input date_from and date_to dates were provided, we fill the default current week start and end dates
+
+      monday=moment().isoWeekday(1)
+      sunday=moment().isoWeekday(7)
+      $scope.date_from=monday.format("DD/MM/YYYY")
+      $scope.date_to=sunday.format("DD/MM/YYYY")
+
+      Meal.query({date_from: $scope.date_from, date_to: $scope.date_to}, (results)-> $scope.meals = results)
 ])

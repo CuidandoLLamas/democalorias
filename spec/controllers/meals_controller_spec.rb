@@ -65,7 +65,7 @@ describe MealsController do
     
     context "when no search param " do
       it 'should return no results' do
-        expect(results.size).to eq(4)
+        expect(results.size).to eq(0)
       end
     end
   end

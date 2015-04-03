@@ -13,7 +13,7 @@ class MealsController < ApplicationController
       @meals=Meal.where('moment between ? and ?',date_from,date_to)
     else
       #No filtering we return all meals
-      @meals=Meal.all
+      @meals=nil
     end
   end
 end

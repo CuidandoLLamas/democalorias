@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  
+  skip_before_filter :verify_authenticity_token
   def index
     @meals=nil
     
@@ -19,5 +19,11 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find(params[:id])
+  end
+
+  def destroy
+    @meal = Meal.find(params[:id])
+    @meal.destroy
+    head :no_content
   end
 end

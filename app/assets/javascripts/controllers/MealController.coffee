@@ -12,4 +12,17 @@ controllers.controller("MealController", [ '$scope', '$routeParams', '$resource'
 
     $scope.back = -> $location.path("/")
 
+    $scope.delete = (recipeId) -> 
+      Meal = $resource('/meals/:mealId', { mealId: "@id", format: 'json' })
+      Meal.remove({mealId: $routeParams.mealId},
+        ( (meal)-> 
+          $location.path("/")
+        ),
+        ( (httpResponse)-> 
+          $location.path("/")
+          #flash.error = "There is no meal with ID #{$routeParams.mealId}"
+        )
+      )
+
+
 ])

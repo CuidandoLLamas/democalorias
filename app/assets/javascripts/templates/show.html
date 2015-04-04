@@ -10,8 +10,14 @@
     <p class="panel-body">
       {{meal.description}}
     </p>
+
+    <button ng-click="delete(meal.id)" class="btn btn-danger">
+      Delete
+    </button>
   </article>
   <button ng-click="back()" class="btn btn-default">
     &larr; Back
   </button>
+
+
 </section>

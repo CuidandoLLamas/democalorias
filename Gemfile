@@ -59,7 +59,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "cucumber-rails"
+  gem "cucumber-rails", :require => false
 end
 
 gem 'sass', '3.2.19' 

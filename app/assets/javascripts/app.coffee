@@ -15,7 +15,7 @@ caloriesPerMeal.config([ '$routeProvider',
         controller: 'MealsController'
       ).when('/meals/:mealId',
         templateUrl: "show.html"
-        controller: "RecipeController"
+        controller: "MealController"
       )
 ])
 

@@ -3,59 +3,24 @@
 </header>
 <section class="row">
   <form>
-    <!--
-    <div class="form-group col-md-6 col-md-offset-3">
-      <label for="keywords" class="sr-only">Keywords</label>
-      <input type="text" autofocus class="form-control" placeholder="Recipe name, e.g. Baked Potato">
-    </div>
-    -->
     <div class="container">
       <div class="row">
-        <div class='col-sm-3'>
-          <label for="Date from" >Date from</label>
+        
+        <div class="form-group col-md-6 col-md-offset-3">
+          <label for="date_from" class="sr-only">Date from</label>
+          <input type="text" ng-model="date_from" autofocus class="form-control" placeholder="Date from">
         </div>
-        <div class='col-sm-3'>
-          <div class="form-group">
-            <div class='input-group date' id='datetimepicker1'>
-              
-              <input ng-model="date_from" type='text' class="form-control" />
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <!-- Read how to make bootstrap jquery components run with angular https://scotch.io/tutorials/how-to-correctly-use-bootstrapjs-and-angularjs-together
-        <script type="text/javascript">
-              $(function () {
-                  $('#datetimepicker1').datetimepicker();
-              });
-        </script>
-        -->
+
       </div>
+    
 
       <div class="row">
-        <div class='col-sm-3'>
-          <label for="Date to" >Date from</label>
+
+        <div class="form-group col-md-6 col-md-offset-3">
+          <label for="date_to" class="sr-only">Date to</label>
+          <input type="text" ng-model="date_to" autofocus class="form-control" placeholder="Date to">
         </div>
-        <div class='col-sm-3'>
-          <div class="form-group">
-            <div class='input-group date' id='datetimepicker2'>
-              
-              <input ng-model="date_to" type='text' class="form-control" />
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <!-- Read how to make bootstrap jquery components run with angular https://scotch.io/tutorials/how-to-correctly-use-bootstrapjs-and-angularjs-together
-        <script type="text/javascript">
-              $(function () {
-                  $('#datetimepicker1').datetimepicker();
-              });
-        </script>
-        -->
+
       </div>
     </div>
 </div>
@@ -72,9 +37,9 @@
   <ul class="list-unstyled">
     <li ng-repeat="meal in meals">
       <section class="well col-md-6 col-md-offset-3">
-        <!--
-        <h1 class="h3 col-md-6 text-right" style="margin-top: 0"><a href="#">{{meal.description}}</a></h1>
-      -->
+        
+        <h1 class="h3 col-md-6 text-right" style="margin-top: 0"><a href ng-click="view(meal.id)">{{meal.moment}}</a></h1>
+      
         <p>{{'Moment:' + meal.moment}}</p>
         <p>{{'Description:' + meal.description}}</p>
         <p>{{'Calories:' + meal.calories}}</p>

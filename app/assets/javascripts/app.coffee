@@ -3,6 +3,8 @@ caloriesPerMeal = angular.module('caloriesPerMeal',[
   'ngRoute',
   'ngResource',
   'controllers',
+  'angular-flash.service',
+  'angular-flash.flash-alert-directive'
 ])
 
 caloriesPerMeal.config([ '$routeProvider',
@@ -11,6 +13,9 @@ caloriesPerMeal.config([ '$routeProvider',
       .when('/',
         templateUrl: "index.html"
         controller: 'MealsController'
+      ).when('/meals/:mealId',
+        templateUrl: "show.html"
+        controller: "RecipeController"
       )
 ])
 

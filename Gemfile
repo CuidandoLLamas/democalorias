@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'pg'
 
 #Gem used to make ror and angular's required assets work well
 gem 'bower-rails'
@@ -59,7 +60,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "cucumber-rails"
+  gem "cucumber-rails", :require => false
 end
 
 gem 'sass', '3.2.19' 

@@ -26,4 +26,10 @@ class MealsController < ApplicationController
     @meal.destroy
     head :no_content
   end
+
+  def create
+    @meal = Meal.new(params.require(:meal).permit(:description,:moment,:calories))
+    @meal.save
+    render 'show', status: 201
+  end
 end

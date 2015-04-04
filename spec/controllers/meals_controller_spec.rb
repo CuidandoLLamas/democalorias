@@ -90,7 +90,7 @@ describe MealsController do
       it { expect(results["id"]).to eq(meal.id) }
       it { expect(results["description"]).to eq(meal.description) }
       it { expect(results["calories"]).to eq(meal.calories) }
-      it { expect(results["moment"]).to eq(meal.moment.to_json) }
+      it { expect(results["moment"]).to eq(meal.moment.iso8601) }
     end
 
     context "when the meal doesn't exit" do
@@ -98,4 +98,55 @@ describe MealsController do
       it { expect(response.status).to eq(404) }
     end
   end
+
+  describe "create" do
+
+    m=DateTime.now - 1000
+    puts "Moment being used to create:" + m.iso8601
+    Rails.logger.debug "Moment being used to create:" + m.iso8601
+    before do
+      xhr :post, :create, format: :json, meal: 
+        { 
+          description: "Toast", 
+          calories: 12134,
+          moment: m
+        }
+    end
+
+    it { expect(response.status).to eq(201) }
+    it { expect(Meal.last.description).to eq("Toast") }
+    it { expect(Meal.last.calories).to eq(12134) }
+    it { expect(Meal.last.moment.iso8601).to eq(m.iso8601) }
+  end
+
+=begin
+  describe "update" do
+    let(:meal) { 
+      Meal.create!(name: 'Baked Potato w/ Cheese', 
+                     instructions: "Nuke for 20 minutes; top with cheese") 
+    }
+
+
+    before do
+      xhr :put, :update, format: :json, id: meal.id, meal: { name: "Toast", 
+                                                 instructions: "Add bread to toaster, push lever" }
+      meal.reload
+    end
+    it { expect(response.status).to eq(204) }
+    it { expect(meal.name).to eq("Toast") }
+    it { expect(meal.instructions).to eq("Add bread to toaster, push lever") }
+  end
+
+  describe "destroy" do
+    let(:meal_id) { 
+      Meal.create!(name: 'Baked Potato w/ Cheese', 
+                     instructions: "Nuke for 20 minutes; top with cheese").id
+    }
+    before do
+      xhr :delete, :destroy, format: :json, id: meal_id
+    end
+    it { expect(response.status).to eq(204) }
+    it { expect(Meal.find_by_id(meal_id)).to be_nil }
+  end
+=end
 end

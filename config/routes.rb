@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :meals, only: [:index,:show,:destroy]
+  resources :meals, only: [:index,:show,:destroy,:create]
 
   root 'meals#main'
   # The priority is based upon order of creation: first created -> highest priority.

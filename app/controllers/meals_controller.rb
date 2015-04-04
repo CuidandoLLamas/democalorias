@@ -32,4 +32,16 @@ class MealsController < ApplicationController
     @meal.save
     render 'show', status: 201
   end
+
+  def update
+    @meal = Meal.new(params.require(:meal).permit(:description,:moment,:calories))
+    @meal.save
+    render 'show', status: 201
+  end
+
+  def update
+    meal = Meal.find(params[:id])
+    meal.update_attributes(params.require(:meal).permit(:description,:moment,:calories))
+    head :no_content
+  end
 end

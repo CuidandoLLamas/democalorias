@@ -43,4 +43,7 @@ controllers.controller("MealController", [ '$scope', '$routeParams', '$resource'
       $scope.meal.$delete()
       $scope.back()
 
+    $scope.cancel = -> 
+      $scope.back()
+
 ])

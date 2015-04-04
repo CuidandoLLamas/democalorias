@@ -26,7 +26,7 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
       $location.path("/meals/#{mealId}")
 
 
-    $scope.delete = (mealId) -> 
+    $scope.deleteMeal = (mealId) -> 
       Meal = $resource('/meals/:mealId', { mealId: "@id", format: 'json' })
       Meal.remove({mealId: mealId},
         ( (meal)-> 
@@ -41,4 +41,7 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
 
     $scope.newMeal = ->
       $location.path("/meals/new")
+
+    $scope.editMeal = (mealId) ->
+      $location.path("/meals/#{mealId}/edit")
 ])

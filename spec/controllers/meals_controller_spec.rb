@@ -69,4 +69,33 @@ describe MealsController do
       end
     end
   end
+
+
+  describe "show" do
+    before do
+      xhr :get, :show, format: :json, id: meal_id
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "when the meal exists" do
+      let(:meal) { 
+        Meal.create!(description: 'Baked Potato w/ Cheese', 
+               calories: 12123,
+               moment: DateTime.now) 
+      }
+      let(:meal_id) { meal.id }
+
+      it { expect(response.status).to eq(200) }
+      it { expect(results["id"]).to eq(meal.id) }
+      it { expect(results["description"]).to eq(meal.description) }
+      it { expect(results["calories"]).to eq(meal.calories) }
+      it { expect(results["moment"]).to eq(meal.moment.to_json) }
+    end
+
+    context "when the meal doesn't exit" do
+      let(:meal_id) { -9999 }
+      it { expect(response.status).to eq(404) }
+    end
+  end
 end

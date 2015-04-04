@@ -44,8 +44,12 @@
         <p>{{'Description:' + meal.description}}</p>
         <p>{{'Calories:' + meal.calories}}</p>
         <div class="col-md-6">
+          
           <button class="btn btn-info">Edit</button>
-          <button class="btn btn-danger">Delete</button>
+          
+          <a href ng-click="delete(meal.id)">
+            <button class="btn btn-danger">Delete</button>
+          </a>
         </div>
       </section>
 

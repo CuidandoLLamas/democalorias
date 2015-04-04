@@ -1,6 +1,6 @@
 controllers = angular.module('controllers')
-controllers.controller("MealsController", [ '$scope', '$routeParams', '$location','$resource'
-  ($scope,$routeParams,$location,$resource)->
+controllers.controller("MealsController", [ '$scope', '$routeParams', '$location','$resource','$route'
+  ($scope,$routeParams,$location,$resource,$route)->
     $scope.search = (date_from,date_to)->  $location.path("/").search({date_from: date_from,date_to:date_to})
 
     #This statement creates a resource that will have methods to execute REST requests
@@ -23,4 +23,18 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
       Meal.query({date_from: $scope.date_from, date_to: $scope.date_to}, (results)-> $scope.meals = results)
 
     $scope.view = (mealId)-> $location.path("/meals/#{mealId}")
+
+
+    $scope.delete = (mealId) -> 
+      Meal = $resource('/meals/:mealId', { mealId: "@id", format: 'json' })
+      Meal.remove({mealId: mealId},
+        ( (meal)-> 
+          #As we're on same page we ask angular to reload it
+          $route.reload()
+        ),
+        ( (httpResponse)-> 
+          $route.reload()
+          #flash.error = "There is no meal with ID #{mealId}"
+        )
+      )
 ])

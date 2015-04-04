@@ -20,7 +20,7 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
       $scope.date_from=monday.format("DD/MM/YYYY")
       $scope.date_to=sunday.format("DD/MM/YYYY")
 
-      Meal.query({date_from: $scope.date_from, date_to: $scope.date_to}, (results)-> $scope.meals = results)
+      $scope.meals = []
 
     $scope.view = (mealId)-> $location.path("/meals/#{mealId}")
 

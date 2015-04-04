@@ -5,6 +5,8 @@ asset 'angular-mocks'
 
 asset 'moment'
 
+asset 'angular-flash'
+
 asset 'bootstrap-sass-official'
 # vim: ft=ruby
 

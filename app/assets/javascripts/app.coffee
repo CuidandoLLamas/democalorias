@@ -17,8 +17,14 @@ caloriesPerMeal.config([ '$routeProvider', 'flashProvider'
       .when('/',
         templateUrl: "index.html"
         controller: 'MealsController'
+      ).when('/meals/new',
+        templateUrl: "form.html"
+        controller: "MealController"
       ).when('/meals/:mealId',
         templateUrl: "show.html"
+        controller: "MealController"
+      ).when('/meals/:mealId/edit',
+        templateUrl: "form.html"
         controller: "MealController"
       )
 ])

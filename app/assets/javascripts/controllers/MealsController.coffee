@@ -22,7 +22,8 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
 
       $scope.meals = []
 
-    $scope.view = (mealId)-> $location.path("/meals/#{mealId}")
+    $scope.view = (mealId)-> 
+      $location.path("/meals/#{mealId}")
 
 
     $scope.delete = (mealId) -> 
@@ -37,4 +38,7 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
           #flash.error = "There is no meal with ID #{mealId}"
         )
       )
+
+    $scope.newMeal = ->
+      $location.path("/meals/new")
 ])

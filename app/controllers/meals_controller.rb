@@ -10,9 +10,9 @@ class MealsController < ApplicationController
       date_from=DateTime.parse(params[:date_from])
       date_to=DateTime.parse(params[:date_to])
       
-      @meals=Meal.where('moment between ? and ?',date_from,date_to)
+      @meals=Meal.date_range_query_ordered_by_date(date_from,date_to)
     else
-      #No filtering we return all meals
+      #No filtering we return no meals
       @meals=nil
     end
   end

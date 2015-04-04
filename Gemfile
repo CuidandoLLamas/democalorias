@@ -59,8 +59,4 @@ group :development, :test do
   gem 'phantomjs'
 end
 
-group :test do
-  gem "cucumber-rails", :require => false
-end
-
 gem 'sass', '3.2.19' 

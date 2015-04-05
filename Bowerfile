@@ -9,6 +9,8 @@ asset 'angular-flash'
 
 asset 'bootstrap-sass-official'
 
-asset 'angular-ui-bootstrap'
+asset 'angular-bootstrap'
+
+
 # vim: ft=ruby
 

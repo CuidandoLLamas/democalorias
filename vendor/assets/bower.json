@@ -8,6 +8,6 @@
     "moment": "latest",
     "angular-flash": "latest",
     "bootstrap-sass-official": "latest",
-    "angular-ui-bootstrap": "latest"
+    "angular-bootstrap": "latest"
   }
 }

@@ -4,7 +4,8 @@ caloriesPerMeal = angular.module('caloriesPerMeal',[
   'ngResource',
   'controllers',
   'angular-flash.service',
-  'angular-flash.flash-alert-directive'
+  'angular-flash.flash-alert-directive',
+  'ui.bootstrap'
 ])
 
 caloriesPerMeal.config([ '$routeProvider', 'flashProvider'

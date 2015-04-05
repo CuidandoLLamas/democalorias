@@ -8,5 +8,9 @@ asset 'moment'
 asset 'angular-flash'
 
 asset 'bootstrap-sass-official'
+
+asset 'angular-bootstrap'
+
+
 # vim: ft=ruby
 

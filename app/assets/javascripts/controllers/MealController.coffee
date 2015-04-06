@@ -46,4 +46,11 @@ controllers.controller("MealController", [ '$scope', '$routeParams', '$resource'
     $scope.cancel = -> 
       $scope.back()
 
+    #Helper methods to get formatted date and time out of a meal object
+    $scope.getDateOutOfMeal = (meal) ->
+      moment(meal.moment).format("DD/MM/YYYY")
+
+    $scope.getTimeOutOfMeal = (meal) ->
+      moment(meal.moment).format("hh:mm")
+
 ])

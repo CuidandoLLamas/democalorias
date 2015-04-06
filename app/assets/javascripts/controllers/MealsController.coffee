@@ -1,26 +1,82 @@
 controllers = angular.module('controllers')
 controllers.controller("MealsController", [ '$scope', '$routeParams', '$location','$resource','$route'
   ($scope,$routeParams,$location,$resource,$route)->
-    $scope.search = (date_from,date_to)->  $location.path("/").search({date_from: date_from,date_to:date_to})
 
-    #This statement creates a resource that will have methods to execute REST requests
-    Meal = $resource('/meals/:recipeId', { mealId: "@id", format: 'json' })
+
+    #Setup for the calendars
+
+
+#    $scope.today_date_from = () ->
+#      $scope.date_from = new Date()
+
+#    $scope.today_date_to = () ->
+#      $scope.date_from = new Date()
+    
+#    $scope.today()
+
+    #$scope.clear_date_from = () ->
+    #  $scope.date_from = null
+
+    #$scope.clear_date_to = () ->
+    #  $scope.date_to = null
+    
+    #$scope.toggleMin = () ->
+    #  $scope.minDate = $scope.minDate ? null : new Date()
+    
+    #$scope.toggleMin();
+
+    #open functions
+    $scope.open_date_from = ($event) ->
+      $event.preventDefault()
+      $event.stopPropagation()
+      $scope.date_from_opened = true
+
+    $scope.open_date_to = ($event) ->
+      $event.preventDefault()
+      $event.stopPropagation()
+      $scope.date_to_opened = true
+    
+
+    
+    #End for setting up calendars
+
+    #Search action
+    $scope.search = (date_from,date_to)-> 
+      $scope.date_from=date_from
+      $scope.date_to=date_to
+      $location.path("/").search(
+        {
+        date_from: moment(date_from).format("DD/MM/YYYY"),
+        date_to:moment(date_to).format("DD/MM/YYYY")
+        }
+      )
 
     if $routeParams.date_from && $routeParams.date_to
-      date_from = $routeParams.date_from
-      date_to = $routeParams.date_to
+      #This statement creates a resource that will have methods to execute REST requests
+      Meal = $resource('/meals/:recipeId', { mealId: "@id", format: 'json' })
+      #$scope.date_from = $routeParams.date_from
+      #$scope.date_to = $routeParams.date_to
+
+      $scope.date_from=moment($routeParams.date_from,"DD/MM/YYYY")._d
+      $scope.date_to=moment($routeParams.date_to,"DD/MM/YYYY")._d
 
       #The query method is executing a GET request and expects an array to be returned
-      Meal.query({date_from: $routeParams.date_from, date_to: $routeParams.date_to}, (results)-> $scope.meals = results)
+      Meal.query({date_from: $routeParams.date_from, date_to: $routeParams.date_to},
+        (results)-> 
+          $scope.meals = results
+      )
     else
+      $scope.meals = []
       #This means no input date_from and date_to dates were provided, we fill the default current week start and end dates
 
+      $scope.dateOptions = 
+      formatYear: 'yy',
+      startingDay: 1
+    
       monday=moment().isoWeekday(1)
       sunday=moment().isoWeekday(7)
-      $scope.date_from=monday.format("DD/MM/YYYY")
-      $scope.date_to=sunday.format("DD/MM/YYYY")
-
-      $scope.meals = []
+      $scope.date_from=monday._d #.format("DD/MM/YYYY")
+      $scope.date_to=sunday._d #.format("DD/MM/YYYY")
 
     $scope.view = (mealId)-> 
       $location.path("/meals/#{mealId}")
@@ -44,4 +100,12 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
 
     $scope.editMeal = (mealId) ->
       $location.path("/meals/#{mealId}/edit")
+
+    $scope.getDateOutOfMeal = (meal) ->
+      moment(meal.moment).format("DD/MM/YYYY")
+
+    $scope.getTimeOutOfMeal = (meal) ->
+      moment(meal.moment).format("hh:mm")
+
+        
 ])

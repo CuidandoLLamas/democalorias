@@ -7,21 +7,38 @@
       <div class="row">
         
         <div class="form-group col-md-6 col-md-offset-3">
-          <label for="date_from" class="sr-only">Date from</label>
-          <input type="text" ng-model="date_from" autofocus class="form-control" placeholder="Date from">
+          
+
+          <div>
+            
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <h4>Date from</h4>
+                    <p class="input-group">
+                      <input type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="date_from" is-open="date_from_opened" max-date="date_to" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open_date_from($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                </div>
+            
+              
+              <div class="col-md-6">
+                <h4>Date to</h4>
+                <p class="input-group">
+                  <input type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="date_to" is-open="date_to_opened" min-date="date_from"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open_date_to($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+              </div>
+            </div>
+
         </div>
 
       </div>
     
-
-      <div class="row">
-
-        <div class="form-group col-md-6 col-md-offset-3">
-          <label for="date_to" class="sr-only">Date to</label>
-          <input type="text" ng-model="date_to" autofocus class="form-control" placeholder="Date to">
-        </div>
-
-      </div>
     </div>
 </div>
     
@@ -43,8 +60,16 @@
     <li ng-repeat="meal in meals">
       <section class="well col-md-6 col-md-offset-3">
         
-        <h1 class="h3 col-md-6 text-right" style="margin-top: 0"><a href ng-click="view(meal.id)">{{meal.moment}}</a></h1>
-      
+        <a href ng-click="view(meal.id)">
+          <h1 class="h3 col-md-6 text-left" style="margin-top: 0">
+            {{  getDateOutOfMeal(meal) }}
+          </h1>
+          <h2 class="h4 col-md-6 text-left" style="margin-top: 0">
+            {{  getTimeOutOfMeal(meal) }}
+          </h2>
+        </a>
+
+
         <p>{{'Moment:' + meal.moment}}</p>
         <p>{{'Description:' + meal.description}}</p>
         <p>{{'Calories:' + meal.calories}}</p>

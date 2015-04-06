@@ -6,15 +6,20 @@
 
 <section class="col-md-6 col-md-offset-3">
   <article class="panel panel-info" ng-if="meal">
-    <header class="panel-heading"><h1>{{meal.moment}}</h1></header>
+    <header class="panel-heading">
+      <h1>{{  getDateOutOfMeal(meal) }}</h1>
+      <h2>{{  getTimeOutOfMeal(meal) }}</h2>
+    </header>
     <p class="panel-body">
-      {{meal.description}}
+      {{'Description:' + meal.description}}
     </p>
-
-    <button ng-click="delete(meal.id)" class="btn btn-danger">
-      Delete
-    </button>
+    <p class="panel-body">
+      {{'Calories' + meal.calories}}
+    </p>
   </article>
+  <button ng-click="delete(meal.id)" class="btn btn-danger">
+    Delete
+  </button>
   <button ng-click="back()" class="btn btn-default">
     &larr; Back
   </button>

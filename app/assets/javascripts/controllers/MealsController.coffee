@@ -5,25 +5,8 @@ controllers.controller("MealsController", [ '$scope', '$routeParams', '$location
 
     #Setup for the calendars
 
+    $scope.isCollapsed=true
 
-#    $scope.today_date_from = () ->
-#      $scope.date_from = new Date()
-
-#    $scope.today_date_to = () ->
-#      $scope.date_from = new Date()
-    
-#    $scope.today()
-
-    #$scope.clear_date_from = () ->
-    #  $scope.date_from = null
-
-    #$scope.clear_date_to = () ->
-    #  $scope.date_to = null
-    
-    #$scope.toggleMin = () ->
-    #  $scope.minDate = $scope.minDate ? null : new Date()
-    
-    #$scope.toggleMin();
 
     #open functions
     $scope.open_date_from = ($event) ->

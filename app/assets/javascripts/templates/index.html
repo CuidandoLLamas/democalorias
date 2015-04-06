@@ -13,15 +13,15 @@
             
             <div class="row">
                 
-                <div class="col-md-6">
-                    <h4>Date from</h4>
-                    <p class="input-group">
-                      <input type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="date_from" is-open="date_from_opened" max-date="date_to" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open_date_from($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                    </p>
-                </div>
+              <div class="col-md-6">
+                  <h4>Date from</h4>
+                  <p class="input-group">
+                    <input type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="date_from" is-open="date_from_opened" max-date="date_to" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="open_date_from($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                  </p>
+              </div>
             
               
               <div class="col-md-6">
@@ -32,6 +32,33 @@
                     <button type="button" class="btn btn-default" ng-click="open_date_to($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
                 </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label class="checkbox">
+                  <input type="checkbox" ng-click="isCollapsed = !isCollapsed" class="ng-valid ng-dirty">
+                  Filter meals for certain time periods
+                </label>
+              </div>
+            </div>
+
+            <div class="row" collapse="isCollapsed">
+                
+              <div class="col-md-6">
+                  <h5>Time from</h5>
+                  <p class="input-group">
+                    <timepicker ng-model="time_from" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                  </p>
+              </div>
+            
+              
+              <div class="col-md-6">
+                <h5>Time to</h5>
+                  <p class="input-group">
+                    <timepicker ng-model="time_to" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                  </p>
               </div>
             </div>
 

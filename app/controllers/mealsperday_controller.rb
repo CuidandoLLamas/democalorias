@@ -15,9 +15,10 @@ class MealsperdayController < ApplicationController
       current_meal_index=0
 
       @days=[]
+
+      #TODO this loop was good if we were to return elements of days without meals, change it to loop over the meals instead
       #We'll loop over from start date til end_date
       date_from.step(date_to) do | date |
-        day={date: date}
         meals_a_day=[]
 
         #Meals are ordered by date in ascending order so we can loop trough the ones that correspond to
@@ -27,8 +28,11 @@ class MealsperdayController < ApplicationController
           current_meal_index=current_meal_index+1
         end
 
-        day[:meals]=meals_a_day
-        @days.push(day)
+        if meals_a_day.size > 0
+          day={date: date}
+          day[:meals]=meals_a_day
+          @days.push(day)
+        end
       end
       
       logger.debug @days.to_json

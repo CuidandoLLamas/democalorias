@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :meals, only: [:index,:show,:destroy,:create,:update]
 
   root 'meals#main'
+
+  resources :meals, only: [:index,:show,:destroy,:create,:update]
+  resources :mealsperday, only: [:index]
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
